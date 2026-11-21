@@ -1,0 +1,19 @@
+name: Exercise tests
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  exercises:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - run: dotnet test 01-bankkonto/BankAccount.sln -c Release
+      - run: dotnet test 02-test-doubles/tests/TestDoublesExercise.Tests/TestDoublesExercise.Tests.csproj -c Release
+      - run: dotnet test 03-bottom-up-integration/tests/BottomUpIntegrationExercise.Tests/BottomUpIntegrationExercise.Tests.csproj -c Release
